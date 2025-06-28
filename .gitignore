@@ -1,0 +1,297 @@
+# GLASSPHERE Research Initiative - Git Ignore File
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Research Data (Sensitive)
+RESEARCH/data-analysis/raw_data/
+RESEARCH/experiments/results/
+*.csv
+*.xlsx
+*.json
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+
+# Database Files
+*.db
+*.sqlite
+*.sqlite3
+
+# Log Files
+*.log
+logs/
+log/
+
+# Temporary Files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+*.lnk
+
+# Linux
+*~
+
+# Crystal Sample Images (Large Files)
+RESOURCES/multimedia/crystal_samples/
+*.jpg
+*.jpeg
+*.png
+*.tiff
+*.bmp
+*.gif
+
+# Video Files
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+
+# Audio Files
+*.wav
+*.mp3
+*.flac
+*.aac
+
+# Archive Files
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+
+# Configuration Files (Sensitive)
+config.ini
+secrets.json
+credentials.json
+*.key
+*.pem
+*.crt
+
+# API Keys and Tokens
+.env.local
+.env.production
+.env.staging
+
+# Backup Files
+*.bak
+*.backup
+*.old
+
+# Compiled Files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Documentation Build
+docs/build/
+docs/_build/
+
+# Node.js (if using web components)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Quantum Computing Simulators
+qiskit_cache/
+pennylane_cache/
+
+# Machine Learning Models
+models/
+*.model
+*.h5
+*.pth
+*.ckpt
+
+# Jupyter Notebook Output
+*.ipynb
+
+# Research Notebooks (Temporary)
+notebooks/draft/
+notebooks/temp/
+
+# Experimental Data (Raw)
+experiments/raw_data/
+experiments/temp_results/
+
+# Crystal Database Backups
+database/backups/
+*.dump
+*.sql
+
+# Laboratory Equipment Data
+equipment/calibration_data/
+equipment/logs/
+
+# Personal Notes
+notes/
+personal/
+draft/
+
+# Collaboration Files
+collaboration/temp/
+shared/temp/
+
+# Publication Drafts
+publications/drafts/
+papers/drafts/
+
+# Grant Applications
+grants/drafts/
+funding/drafts/
+
+# Patent Applications
+patents/drafts/
+intellectual_property/drafts/ 
