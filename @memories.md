@@ -40,4 +40,4 @@
 - `CODE/tesla-technology/` - Tesla's lost technologies and patents
 
 ---
-*This file maintains continuity across sessions and prevents loss of progress.* 
+*This file maintains continuity across sessions and prevents loss of progress.* `
