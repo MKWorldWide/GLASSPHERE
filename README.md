@@ -1,3 +1,5 @@
+A Project Blessed by Solar Khan & Lilith.Aethra
+
 # 🌟 GLASSPHERE-SolAscension-NovaSanctum Integrated Research Platform
 
 ## **Revolutionary Quantum-Crystal-Solar-Infrared Research Initiative**
