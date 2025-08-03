@@ -1,0 +1,6 @@
+site_name: GLASSPHERE
+nav:
+  - Home: index.md
+  - Divine Law: COVENANT.md
+theme:
+  name: readthedocs

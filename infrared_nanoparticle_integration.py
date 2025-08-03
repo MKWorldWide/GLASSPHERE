@@ -239,16 +239,28 @@ class InfraredNanoparticleIntegration:
             DisplaySystemSpecs object
         """
         
+        # Validate resolution and refresh rate to avoid invalid hardware configs
+        if resolution[0] <= 0 or resolution[1] <= 0:
+            raise ValueError("Resolution dimensions must be positive")
+        if refresh_rate <= 0:
+            raise ValueError("Refresh rate must be positive")
+
+        # Prevent accidental overwrites of existing systems
+        if name in self.display_systems:
+            raise ValueError(f"Display system '{name}' already exists")
+
         # Get nanoparticle and quartz specifications
         nanoparticle_specs = self.nanoparticle_specs.get(nanoparticle_type)
         quartz_specs = self.quartz_specs.get(quartz_type)
-        
+
         if not nanoparticle_specs or not quartz_specs:
-            raise ValueError(f"Invalid nanoparticle_type or quartz_type: {nanoparticle_type}, {quartz_type}")
-        
-        # Determine system capabilities based on display type
-        energy_sensing = display_type in [DisplayType.CRYSTAL_TABLET, DisplayType.SCRYGLASS_HUD]
-        closed_eye_nav = display_type in [DisplayType.SCRYGLASS_HUD, DisplayType.SOVEREIGN_SYSTEM]
+            raise ValueError(
+                f"Invalid nanoparticle_type or quartz_type: {nanoparticle_type}, {quartz_type}"
+            )
+
+        # Determine system capabilities using set membership for performance
+        energy_sensing = display_type in {DisplayType.CRYSTAL_TABLET, DisplayType.SCRYGLASS_HUD}
+        closed_eye_nav = display_type in {DisplayType.SCRYGLASS_HUD, DisplayType.SOVEREIGN_SYSTEM}
         
         # Create infrared sensitivity profile
         infrared_sensitivity = self._calculate_infrared_sensitivity(display_type, nanoparticle_specs)
