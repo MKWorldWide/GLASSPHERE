@@ -5,44 +5,119 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    # Weekly security updates
+    - cron: '0 0 * * 0'
+
+# Global environment variables
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '20'
+  PIP_CACHE_DIR: ~/.cache/pip
+  POETRY_CACHE_DIR: ~/.cache/poetry
+
+# Cancel in-progress runs for pull requests when new commits are pushed
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build-and-test:
+  test:
+    name: Test (Python ${{ matrix.python-version }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ['3.9', '3.10', '3.11']
+        include:
+          - python-version: '3.11'
+            experimental: false
+          - python-version: '3.10'
+            experimental: true
+          - python-version: '3.9'
+            experimental: true
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+        cache-dependency-path: '**/requirements*.txt'
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        if [ -f "test-requirements.txt" ]; then pip install -r test-requirements.txt; fi
+
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Run tests with pytest
+      if: !matrix.experimental
+      run: |
+        pip install pytest pytest-cov
+        python -m pytest tests/ --cov=./ --cov-report=xml --cov-report=term-missing -v
+
+    - name: Upload coverage to Codecov
+      if: !matrix.experimental && github.event_name == 'push'
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        fail_ci_if_error: false
+
+  docs:
+    name: Build and Deploy Docs
+    needs: test
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Install Python dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r AthenaMyst_Host/requirements.txt || true
-      - name: Install Node dependencies
-        run: |
-          if [ -f package.json ]; then npm install; fi
-      - name: Lint Python
-        run: |
-          pip install flake8
-          flake8 . || true
-      - name: Lint Node
-        run: |
-          if [ -f package.json ]; then npx eslint . || true; fi
-      - name: Run Python tests
-        run: |
-          python -m pytest AthenaMyst_Host/tests --maxfail=10 --disable-warnings -v || true
-      - name: Run Node tests
-        run: |
-          if [ -f package.json ]; then npm test || true; fi
-      - name: Upload coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: htmlcov/
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Install MkDocs and plugins
+      run: |
+        pip install mkdocs mkdocs-material mkdocstrings[python] mkdocs-git-revision-date-localized-plugin
+    
+    - name: Build documentation
+      run: mkdocs build --strict
+    
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site
+
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run Bandit Security Linter
+      uses: PyCQA/bandit@master
+      with:
+        args: -r . --severity-level high --confidence-level high -x tests/
+    
+    - name: Check for vulnerable dependencies
+      uses: pyupio/safety@v1
+      with:
+        api-key: ${{ secrets.SAFETY_API_KEY }}
+        check: true
+        continue-on-vulnerability: true
