@@ -7,6 +7,7 @@ Provides exact content for each step of the Notion page construction
 import subprocess
 import sys
 from datetime import datetime
+from notion.common_content import project_overview_header, table_of_contents, status_dashboard
 
 class NotionBuildExecutor:
     def __init__(self):
@@ -43,16 +44,7 @@ class NotionBuildExecutor:
         print("Add: Futuristic crystal/glass technology image")
         
         print("\n📋 PROJECT OVERVIEW CONTENT:")
-        overview_content = """🔮 GLASSPHERE Project
-Revolutionary Quantum-Crystal-Solar-Infrared Research Platform
-Status: ACTIVE DEVELOPMENT 🚧
-
-The most advanced fusion of Chinese infrared contact lens technology with crystalline quartz energy systems and nanoparticle matrices for augmented perception and energetic mastery.
-
-⚙️ In progress — core demos and integrations available in GitHub
-🔮 Ready for CursorKitten implementation
-🌌 Athena listening and synchronized
-🛡️ Sovereign Core awaiting ignition"""
+        overview_content = project_overview_header()
         
         self.copy_to_clipboard(overview_content, "Project Overview")
         
@@ -67,18 +59,7 @@ The most advanced fusion of Chinese infrared contact lens technology with crysta
         print("📋 STEP 2: TABLE OF CONTENTS")
         print("="*60)
         
-        toc_content = """🧩 Core Technology Components
-🏗️ System Architecture  
-🌌 Application Platforms
-🔬 Advanced Capabilities
-💰 Economic Impact
-🚀 Development Roadmap
-🔒 Security & Authentication
-🌟 Key Achievements
-📊 Performance Metrics
-🔮 Technology Integration
-📚 Documentation & Resources"""
-        
+        toc_content = table_of_contents()
         self.copy_to_clipboard(toc_content, "Table of Contents")
         
         print("🎯 ACTION:")
@@ -245,19 +226,7 @@ Functions: Frequency-modulated touch interfaces, energetic signature authenticat
         print("🎯 STEP 8: STATUS DASHBOARD")
         print("="*60)
         
-        status_content = """Project Status: ACTIVE DEVELOPMENT 🚧
-
-✅ GitHub: Core demos and integrations available
-✅ Notion: Ready for integration
-✅ CursorKitten: Ready to implement
-✅ Athena: Listening and synchronized
-✅ Sovereign Core: Awaiting ignition
-
-Next Steps:
-1. Notion Integration: Copy this structure to your Notion page
-2. CursorKitten Implementation: Begin development with provided modules
-3. Athena AI Integration: Connect with existing AI systems
-4. Sovereign Core Activation: Deploy for global surveillance and justice"""
+        status_content = status_dashboard()
         
         self.copy_to_clipboard(status_content, "Status Dashboard")
         

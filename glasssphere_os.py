@@ -26,6 +26,8 @@ from datetime import datetime
 from typing import Dict, List, Tuple, Optional, Any, Union
 from dataclasses import dataclass
 import math
+from core.constants import SCHUMANN_RESONANCE, GOLDEN_RATIO, QUANTUM_COHERENCE_THRESHOLD
+from core.utils import cosine_similarity, euclidean_similarity
 from enum import Enum
 
 # Configure logging
@@ -95,9 +97,9 @@ class GlassSphereOS:
         self.logger = logging.getLogger(__name__)
         
         # Fundamental constants
-        self.SCHUMANN_RESONANCE = 7.83  # Hz
-        self.GOLDEN_RATIO = 1.618033988749895
-        self.QUANTUM_COHERENCE_THRESHOLD = 0.8
+        self.SCHUMANN_RESONANCE = SCHUMANN_RESONANCE
+        self.GOLDEN_RATIO = GOLDEN_RATIO
+        self.QUANTUM_COHERENCE_THRESHOLD = QUANTUM_COHERENCE_THRESHOLD
         
         # System state
         self.current_user: Optional[UserProfile] = None
@@ -200,7 +202,7 @@ class GlassSphereOS:
         
         for user_id, profile in self.user_profiles.items():
             # Calculate voice pattern similarity
-            similarity = self._calculate_voice_similarity(profile.voice_pattern, voice_pattern)
+            similarity = cosine_similarity(profile.voice_pattern, voice_pattern)
             
             if similarity > 0.85:  # 85% similarity threshold
                 self.current_user = profile
@@ -217,7 +219,7 @@ class GlassSphereOS:
         
         for user_id, profile in self.user_profiles.items():
             # Calculate energetic signature similarity
-            similarity = self._calculate_energetic_similarity(profile.energetic_signature, energetic_signature)
+            similarity = euclidean_similarity(profile.energetic_signature, energetic_signature)
             
             if similarity > 0.90:  # 90% similarity threshold
                 self.current_user = profile
@@ -301,25 +303,8 @@ class GlassSphereOS:
     
     def _calculate_energetic_similarity(self, stored_signature: Dict[str, float],
                                       input_signature: Dict[str, float]) -> float:
-        """Calculate similarity between energetic signatures"""
-        
-        if not stored_signature or not input_signature:
-            return 0.0
-        
-        # Calculate Euclidean distance similarity
-        common_keys = set(stored_signature.keys()) & set(input_signature.keys())
-        
-        if not common_keys:
-            return 0.0
-        
-        distance = math.sqrt(sum((stored_signature[k] - input_signature[k])**2 
-                               for k in common_keys))
-        
-        # Convert distance to similarity (0-1)
-        max_distance = math.sqrt(len(common_keys))
-        similarity = 1.0 - (distance / max_distance)
-        
-        return max(0.0, similarity)
+        """Backward-compat shim to core.utils.euclidean_similarity."""
+        return euclidean_similarity(stored_signature, input_signature)
     
     def process_touch_input(self, touch_data: TouchInputData) -> Dict[str, Any]:
         """

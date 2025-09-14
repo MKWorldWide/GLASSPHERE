@@ -10,14 +10,15 @@ Date: December 2024
 import math
 import json
 from datetime import datetime
+from core.constants import SCHUMANN_RESONANCE, GOLDEN_RATIO
 
 class SimpleTeslaSystem:
     """Simplified Tesla energy system for demonstration."""
     
     def __init__(self):
         # Tesla's fundamental constants
-        self.SCHUMANN_BASE = 7.83  # Hz
-        self.GOLDEN_RATIO = 1.618033988749895
+        self.SCHUMANN_BASE = SCHUMANN_RESONANCE  # Hz
+        self.GOLDEN_RATIO = GOLDEN_RATIO
         self.HYDROGEN_LINE = 1420405751.786  # Hz (1420 MHz)
         self.SCALAR_WAVE_VELOCITY = 1.5e9  # m/s
         

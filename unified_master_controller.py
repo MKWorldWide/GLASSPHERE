@@ -26,6 +26,7 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 import numpy as np
 import pandas as pd
+from core.constants import SCHUMANN_RESONANCE
 
 # Configure comprehensive logging for unified operations
 logging.basicConfig(
@@ -98,7 +99,7 @@ class QuantumCrystalSolarCore:
             'location': location,
             'tesla_coil_specs': {
                 'primary_voltage': 10000.0,
-                'resonance_frequency': 7.83,
+                'resonance_frequency': SCHUMANN_RESONANCE,
                 'enhancement_factor': 850
             },
             'solar_specs': {
@@ -107,7 +108,7 @@ class QuantumCrystalSolarCore:
                 'quantum_dot_enhancement': 0.15  # 15% efficiency boost
             },
             'crystal_resonance': {
-                'resonance_frequency': 7.83,
+                'resonance_frequency': SCHUMANN_RESONANCE,
                 'amplification_factor': 100,
                 'field_strength': 2000  # V/m
             },
@@ -241,7 +242,7 @@ class NovaSanctumGrid:
                 'free_energy_devices': 2
             },
             'synchronization_level': 0.95,  # 95%
-            'global_resonance': 7.83
+            'global_resonance': SCHUMANN_RESONANCE
         }
         
         # New solar and crystal nodes

@@ -21,6 +21,7 @@ from datetime import datetime
 from typing import Dict, List, Tuple, Optional, Any, Union
 from dataclasses import dataclass
 from enum import Enum
+from core.image_ops import resize_nearest, apply_color_mapping
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -459,14 +460,10 @@ class GlassSphereUIShell:
         """Apply overlay to base image"""
         
         # Resize overlay data to match base image
-        overlay_resized = self._resize_overlay_data(
-            overlay_data.data, base_image.shape[:2]
-        )
+        overlay_resized = resize_nearest(overlay_data.data, base_image.shape[:2])
         
         # Apply color mapping
-        overlay_colored = self._apply_color_mapping(
-            overlay_resized, overlay_data.color_map
-        )
+        overlay_colored = apply_color_mapping(overlay_resized, overlay_data.color_map)
         
         # Apply intensity scaling
         overlay_scaled = overlay_colored * overlay_data.intensity_scale
@@ -477,65 +474,7 @@ class GlassSphereUIShell:
         
         return blended_image
     
-    def _resize_overlay_data(self, overlay_data: np.ndarray, 
-                           target_shape: Tuple[int, int]) -> np.ndarray:
-        """Resize overlay data to target shape"""
-        
-        # Simple nearest neighbor resizing
-        # In real implementation, use proper interpolation
-        height, width = target_shape
-        
-        if overlay_data.ndim == 2:
-            # Single channel data
-            resized = np.zeros((height, width))
-            for i in range(height):
-                for j in range(width):
-                    src_i = int(i * overlay_data.shape[0] / height)
-                    src_j = int(j * overlay_data.shape[1] / width)
-                    resized[i, j] = overlay_data[src_i, src_j]
-        else:
-            # Multi-channel data
-            channels = overlay_data.shape[2]
-            resized = np.zeros((height, width, channels))
-            for i in range(height):
-                for j in range(width):
-                    src_i = int(i * overlay_data.shape[0] / height)
-                    src_j = int(j * overlay_data.shape[1] / width)
-                    resized[i, j] = overlay_data[src_i, src_j]
-        
-        return resized
-    
-    def _apply_color_mapping(self, data: np.ndarray, 
-                           color_map: str) -> np.ndarray:
-        """Apply color mapping to data"""
-        
-        # Normalize data to 0-1 range
-        data_norm = (data - data.min()) / (data.max() - data.min() + 1e-8)
-        
-        # Simple color mapping (in real implementation, use proper colormaps)
-        if color_map == "hot":
-            # Red to yellow to white
-            r = np.clip(data_norm * 3, 0, 1)
-            g = np.clip((data_norm - 0.33) * 3, 0, 1)
-            b = np.clip((data_norm - 0.67) * 3, 0, 1)
-        elif color_map == "plasma":
-            # Purple to orange
-            r = np.clip(data_norm * 2, 0, 1)
-            g = np.clip((data_norm - 0.5) * 2, 0, 1)
-            b = np.clip(1 - data_norm * 2, 0, 1)
-        elif color_map == "viridis":
-            # Blue to green to yellow
-            r = np.clip(data_norm * 2, 0, 1)
-            g = np.clip(data_norm, 0, 1)
-            b = np.clip(1 - data_norm, 0, 1)
-        else:
-            # Default grayscale
-            r = g = b = data_norm
-        
-        if data.ndim == 2:
-            return np.stack([r, g, b], axis=2)
-        else:
-            return data_norm
+    # removed duplicated helpers: using core.image_ops
     
     def enable_night_vision_mode(self, display_id: str, user_id: str) -> bool:
         """Enable night vision mode"""
