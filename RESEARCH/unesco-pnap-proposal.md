@@ -2,9 +2,38 @@
 ## Operation Prime Quark - Global Quantum Resonance Initiative
 
 **Submitted by:** GLASSPHERE Research Initiative  
-**Date:** December 2024  
+**Date:** December 2024 (Addendum updated: September 2025)  
 **Project Code:** PNAP-2024-001  
 **Classification:** Scientific Research & Cultural Heritage Preservation  
+
+---
+
+## 2025 Addendum — Project Status and Scope Update (Active Development)
+
+This addendum aligns PNAP with our current repository state and lean research process.
+
+- Status: Active Development — simulation demos, docs site, and CI are live.
+- Safety & Governance: AthenaMist oversight for ethics, rate limits, and emergency stops.
+- Lean Validation: Initial field protocol v1.1 narrows scope to non-invasive measurements and reversible stimulation with strict thresholds.
+- Infrared Integration: GlassSphere OS + IR UCNP layers are used for simulated visualization and operator training only. No medical claims.
+
+### Key Updates Since 2024 Submission
+- Protocol v1.1: Tightened activation envelope, stepwise gating, and mandatory cooldown windows.
+- Measurement Kit: Standardized GPR/LiDAR/magnetometer stack + environmental baseline package.
+- Data Schema: Normalized measurement schema for resonance data and site metadata; sample JSON attached in companion docs.
+- Public Transparency: Lightweight website (GitHub Pages) built from MkDocs with versioned docs and changelog.
+
+### Revised Phased Plan (2025)
+1. Mapping & Baselines (Q3): Site permissions, non-invasive scans, environmental baselines, resonance survey.
+2. Micro‑Stimulation Trials (Q3–Q4): Low-amplitude, time‑boxed stimulation under safety gates; full logging; independent review.
+3. Cross‑Site Correlation (Q4): Compare response curves across sites, seasonal/diurnal patterns, and instrumentation variance.
+4. Publication & Data Release (Q4): Release anonymized datasets, methods, and safety audit summaries.
+
+### Safety & Ethics (Expanded)
+- Non‑invasive first: No irreversible changes to cultural heritage sites.
+- Thresholds: Predefined field intensity and duration caps; automatic abort on excursions.
+- Independent Safety Officer: External reviewer signs off on each activation window.
+- Community & Heritage: Prior, informed, written consent from local custodians; publish plans and post‑hoc reports.
 
 ---
 
