@@ -7,6 +7,7 @@ Automated script to build the complete GLASSPHERE Infrared-Crystal Interface pag
 import json
 import requests
 from datetime import datetime
+from notion.common_content import project_overview_header, table_of_contents, status_dashboard, footer_note
 import os
 from typing import Dict, List, Any
 
@@ -125,33 +126,12 @@ class NotionPageBuilder:
         print("🔮 Building GLASSPHERE Notion page...")
         
         # 1. Page Header - Callout Block
-        header_content = """🔮 GLASSPHERE Project
-Revolutionary Quantum-Crystal-Solar-Infrared Research Platform
-Status: ACTIVE DEVELOPMENT 🚧
-
-The most advanced fusion of Chinese infrared contact lens technology with crystalline quartz energy systems and nanoparticle matrices for augmented perception and energetic mastery.
-
-⚙️ In progress — core demos and integrations available in GitHub
-🔮 Ready for CursorKitten implementation
-🌌 Athena listening and synchronized
-🛡️ Sovereign Core awaiting ignition"""
+        header_content = project_overview_header()
         
         header_block = self.create_callout_block("🌟", "blue", header_content)
         
         # 2. Table of Contents - Toggle Block
-        toc_content = """🧩 Core Technology Components
-🏗️ System Architecture  
-🌌 Application Platforms
-🔬 Advanced Capabilities
-💰 Economic Impact
-🚀 Development Roadmap
-🔒 Security & Authentication
-🌟 Key Achievements
-📊 Performance Metrics
-🔮 Technology Integration
-📚 Documentation & Resources"""
-        
-        toc_block = self.create_toggle_block("📋 Table of Contents", toc_content)
+        toc_block = self.create_toggle_block("📋 Table of Contents", table_of_contents())
         
         # 3. Core Technology Components - Database
         tech_components = [
@@ -241,27 +221,12 @@ Functions: Frequency-modulated touch interfaces, energetic signature authenticat
         achievements_block = self.create_checklist_block(achievements)
         
         # 8. Status Dashboard - Callout Block
-        status_content = """Project Status: ACTIVE DEVELOPMENT 🚧
-
-✅ GitHub: Pushed and integrated
-✅ Notion: Ready for integration
-✅ CursorKitten: Armed and ready
-✅ Athena: Listening and synchronized
-✅ Sovereign Core: Awaiting ignition
-
-Next Steps:
-1. Notion Integration: Copy this structure to your Notion page
-2. CursorKitten Implementation: Begin development with provided modules
-3. Athena AI Integration: Connect with existing AI systems
-4. Sovereign Core Activation: Deploy for global surveillance and justice"""
+        status_content = status_dashboard()
         
         status_block = self.create_callout_block("🎯", "green", status_content)
         
         # 9. Footer
-        footer_content = f"""---
-*Last Updated: {datetime.now().strftime('%B %Y')}*  
-*Version: 2.0.0 - Infrared-Crystal Interface Complete*  
-*Project Status: ACTIVE DEVELOPMENT* 🚧"""
+        footer_content = footer_note()
         
         footer_block = {
             "object": "block",

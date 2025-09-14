@@ -1,0 +1,6 @@
+"""Shared constants for the GLASSPHERE project."""
+
+SCHUMANN_RESONANCE: float = 7.83
+GOLDEN_RATIO: float = 1.618033988749895
+QUANTUM_COHERENCE_THRESHOLD: float = 0.8
+
