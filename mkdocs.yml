@@ -1,6 +1,14 @@
 site_name: GLASSPHERE
-nav:
-  - Home: index.md
-  - Divine Law: COVENANT.md
 theme:
   name: readthedocs
+plugins:
+  - search
+  - mkdocstrings
+  - git-revision-date-localized
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Architecture: architecture.md
+  - Infrared Integration: infrared.md
+  - API Reference: api.md
+  - Divine Law: COVENANT.md

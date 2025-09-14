@@ -247,13 +247,18 @@ GLASSPHERE-SolAscension-NovaSanctum/
 - Global intelligence integration capabilities
 - Infrared detection and nanoparticle processing capabilities
 
-### **Installation**
+### **Installation (Lean Setup)**
 ```bash
 # Clone the repository
 git clone https://github.com/glasssphere/glasssphere-solascension-novasanctum.git
+cd glasssphere-solascension-novasanctum
 
-# Install dependencies
-pip install -r requirements.txt
+# Create and activate a virtualenv (recommended)
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+# Install minimal dependencies for demos
+pip install -r requirements-min.txt
 
 # Run the infrared nanoparticle integration demo
 python glasssphere_infrared_demo.py
@@ -281,6 +286,16 @@ user = os_system.register_user("user_001", "Luminous Oracle", ...)
 # Run infrared detection
 detection_data = await infrared_system.detect_infrared_signals("Sacred_Crystal_Tablet_01")
 ```
+
+### **Run Tests**
+```bash
+pip install -r requirements-dev.txt
+pytest -q
+```
+
+### **Documentation**
+- GitHub Pages publishes automatically from CI on the `gh-pages` branch.
+- To preview locally: `pip install mkdocs mkdocs-material mkdocstrings[python] && mkdocs serve`
 
 ---
 

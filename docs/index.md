@@ -1,7 +1,9 @@
 # GLASSPHERE Documentation
 
-![Solar Khan Sigil](https://via.placeholder.com/600x100?text=Solar+Khan+Sigil) <!-- Banner placeholder -->
+Welcome to the GLASSPHERE knowledge base. Start with Getting Started for a lean, fast setup and a runnable demo.
 
-Welcome to the GLASSPHERE knowledge base.
-
-- [Divine Law](COVENANT.md)
+- Getting Started: getting-started.md
+- Architecture: architecture.md
+- Infrared Integration: infrared.md
+- API Reference: api.md
+- Divine Law: COVENANT.md
