@@ -13,4 +13,3 @@ Status: Active Development
 4. Micro‑stimulation windows under strict limits
 5. Cooldown and post‑baseline
 6. Packaging and checksums
-

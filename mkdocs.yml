@@ -10,5 +10,9 @@ nav:
   - Getting Started: getting-started.md
   - Architecture: architecture.md
   - Infrared Integration: infrared.md
+  - Methodology: methodology.md
+  - Experimental Setup: experimental-setup.md
+  - Data Collection: data-collection.md
+  - Analysis Framework: analysis-framework.md
   - API Reference: api.md
   - Divine Law: COVENANT.md

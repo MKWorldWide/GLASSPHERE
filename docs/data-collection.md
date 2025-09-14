@@ -11,4 +11,3 @@ Status: Active Development
 ## Storage
 - Normalized tables + referenced raw traces by checksum
 - Minimal JSON samples included in PNAP v1.1 and schema docs
-
