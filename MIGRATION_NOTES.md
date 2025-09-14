@@ -1,5 +1,7 @@
 # Migration Notes
 
+Project Status: Active Development
+
 This document outlines the changes made during the repository rehabilitation and any necessary migration steps.
 
 ## Changes Made
