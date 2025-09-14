@@ -1,0 +1,2 @@
+"""SolAscension integration package (placeholder)."""
+
